@@ -48,3 +48,22 @@ class Server:
             return []
 
         return self.dataset()[start:end]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        Hypermedia
+        Pagination
+        """
+
+        data = self.get_page(page, page_size)
+        total_pages = math.ceil(len(self.dataset()) / page_size)
+        has_next = page < total_pages
+        has_prev = page > 1
+        return {
+            "page_size": page_size,
+            "page": page,
+            "data": data,
+            "next_page": page + 1 if has_next else None,
+            "prev_page": page - 1 if has_prev else None,
+            "total_pages": total_pages
+        }
