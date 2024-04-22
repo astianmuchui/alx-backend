@@ -7,15 +7,15 @@ This module demonstrates simple API pagination
 
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page, page_size):
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
 
     """Returns a tuple
     of the first page and the last page"""
 
-    return (page - 1) * page_size, page * page_size
+    return ((page - 1) * page_size, page * page_size)
 
 
 class Server:
@@ -40,5 +40,7 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Returns a page of the dataset
         """
+        assert page > 0
+        assert page_size > 0
         start, end = index_range(page, page_size)
         return self.dataset()[start:end]
