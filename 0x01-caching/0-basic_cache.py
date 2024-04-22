@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """ BaseCaching module
 """
-
-from base import BaseCaching
-
+BaseCaching = __import__("./base").BaseCaching
 
 class BasicCache(BaseCaching):
     """ BasicCache implements a simple cache
